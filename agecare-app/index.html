@@ -7,7 +7,15 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <h1>Click the button to go to http://127.0.0.1:8001 only when this python file is run</h1>
+      <button onclick="redirect()">Go to URL</button>
+    </div>
     <script type="module" src="/src/main.js"></script>
+    <script>
+      function redirect() {
+          window.location.href = "http://127.0.0.1:8001";
+      }
+  </script>
   </body>
 </html>
