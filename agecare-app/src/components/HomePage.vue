@@ -1,0 +1,234 @@
+<template>
+    <div class="container border rounded-3 bg-white bg-opacity-75 p-5">
+      <div class="main-content">
+        <div class="grid-container">
+          <button class="grid-item going-out" @click="checkIn">Check In</button>
+          <button class="grid-item" @click="goToChatrooms">Chatrooms</button>
+          <button class="grid-item" @click="goToSos">Emergency SOS Button</button>
+        </div>
+        <div class="right-panel">
+          <div class="header">
+            <h4><b>Hello! Hope you are having a good day today!</b></h4>
+            <p>{{ currentDate }}</p>
+            <p>{{ currentTime }}</p>
+          </div>
+          <div class="message">
+            <h2>Notification will be displayed here for Personalized Medications</h2>
+          </div>
+        </div>
+      </div>
+      <!-- Message Box for Notification -->
+      <div v-if="showNotification" class="notification-box">
+        <div class="notification-content">
+          <p>{{ checkInMessage }}</p>
+          <button @click="closeNotification">Close</button>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        currentDate: new Date().toLocaleDateString(),
+        currentTime: new Date().toLocaleTimeString(),
+        showNotification: false, // Controls the visibility of the notification box
+        checkInMessage: 'Thank you for checking in! Hope you are doing well!', // The notification message
+      };
+    },
+    mounted() {
+      setInterval(() => {
+        this.currentTime = new Date().toLocaleTimeString();
+      }, 1000);
+    },
+    methods: {
+      checkIn() {
+        this.showNotification = true; // Show the notification box when Check In is clicked
+      },
+      closeNotification() {
+        this.showNotification = false; // Hide the notification box
+      },
+      goToChatrooms() {
+        this.$router.push({ name: 'ChatRoom' });
+      },
+      goToSos() {
+        this.$router.push({ name: 'SOS' });
+      },
+    },
+  };
+  </script>
+  
+  <style scoped>
+.container {
+    width: 1000mm;
+    height: 197mm;
+    display: flex;
+    flex-direction: column;
+    padding: 10mm;
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+    margin: 0 auto;
+    background-image: url('./src/assets/care.PNG'); /* Path to your uploaded image */
+    background-size: cover;
+    background-position: center;
+}
+
+.main-content {
+    display: flex;
+    flex-grow: 1;
+    background-color: rgba(255, 255, 255, 0.75); /* Semi-transparent overlay for readability */
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 40%;
+    margin-right: 10mm;
+}
+
+.grid-item {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Make the items fill the grid cell */
+}
+
+.going-out {
+    grid-column: span 2;
+    background-color: crimson;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.message {
+    background-color: lightgrey;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%; /* Ensures this section takes all available height */
+}
+
+/* Adjustments to match the height of the notification section */
+.grid-container {
+    grid-template-rows: 1fr 1fr; /* Each row will take equal height */
+}
+
+.grid-item:nth-child(2),
+.grid-item:nth-child(3) {
+    grid-row: span 2; /* These two items will span across two rows */
+}
+
+/* Notification Box Styling */
+.notification-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Ensure the box is above other content */
+}
+
+.notification-content {
+    text-align: center;
+}
+
+.notification-content p {
+    font-size: 18px;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.notification-content button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Responsive layout */
+@media (max-width: 1200px) {
+    .container {
+        width: 80%;
+        height: auto;
+        padding: 5mm;
+    }
+
+    .main-content {
+        flex-direction: column;
+    }
+
+    .grid-container {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .grid-item {
+        font-size: 14px;
+        padding: 15px;
+    }
+
+    .right-panel {
+        margin-top: 20px;
+    }
+
+    .header {
+        font-size: 18px;
+        padding: 15px;
+    }
+
+    .message {
+        font-size: 16px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .going-out {
+        grid-column: 1 / -1;
+    }
+}
+</style>
