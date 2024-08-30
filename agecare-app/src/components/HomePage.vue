@@ -58,24 +58,53 @@ export default {
     }, 1000);
   },
   methods: {
-    checkIn() {
-      // Mark the first notification as checked in
-      if (this.notifications.length > 0) {
-        this.notifications[0].checkedIn = true; // Mark as checked in
-        this.notifications = this.notifications.filter(n => !n.checkedIn); // Remove checked in notifications
-        this.showNotification = true; // Show the confirmation message
-      }
-    },
-    closeNotification() {
-      this.showNotification = false; // Hide the notification box
-    },
-    goToChatrooms() {
-      this.$router.push({ name: 'ChatRoom' });
-    },
-    goToSos() {
-      this.$router.push({ name: 'SOS' });
-    },
+  async checkIn() {
+    // Mark the first notification as checked in
+    if (this.notifications.length > 0) {
+      this.notifications[0].checkedIn = true; // Mark as checked in
+      this.notifications = this.notifications.filter(n => !n.checkedIn); // Remove checked in notifications
+      this.showNotification = true; // Show the confirmation message
+    }
   },
+  closeNotification() {
+    this.showNotification = false; // Hide the notification box
+  },
+  goToChatrooms() {
+    this.$router.push({ name: 'ChatRoom' });
+  },
+  async goToSos() {
+    await this.sendTelegramAlert();
+    this.$router.push({ name: 'SOS' });
+  },
+  async sendTelegramAlert() {
+    const botToken = '7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI'; // Replace with your bot token
+    const chatId = '311341386'; // Replace with your chat ID use the link to find chat id: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates, group chat id is: -1002147797812
+    const message = '👴👵 ALERT!! Your loved one nearly had a fall. We are currently checking on his/her condition. ⌛ Please respond without delay!';
+
+    try {
+      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        console.log('Telegram alert sent successfully');
+      } else {
+        console.error('Failed to send Telegram alert', result);
+      }
+    } catch (error) {
+      console.error('Error sending Telegram alert', error);
+    }
+  },
+}
+
 };
 </script>
 

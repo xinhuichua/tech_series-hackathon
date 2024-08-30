@@ -16,42 +16,52 @@
 <script>
 export default {
   methods: {
-  handleResponse(response) {
-    // Handle the user's response based on the clicked button to send the telegram message to guardian
-    if (response === 'fine') {
-      alert('You selected: I am fine');
-    } else if (response === 'pain') {
-      alert('You selected: I am in pain but I can still stand and walk');
-    } else if (response === 'help') {
-      alert('You selected: I need help right now');
-    }
-  },
-  goHome() {
-    this.$router.push({ name: 'Home' }); // Navigate to the home route
-  },
-  checkIn() {
-    // Mark the first notification as checked in
-    if (this.notifications.length > 0) {
-      this.notifications[0].checkedIn = true; // Mark as checked in
-      this.notifications = this.notifications.filter(n => !n.checkedIn); // Remove checked in notifications
-      this.showNotification = true; // Show the confirmation message
+    async handleResponse(response) {
+      // Define the message based on the button clicked
+      let message = '';
+      if (response === 'fine') {
+        message = '🎉 GREAT NEWS! Your loved one is doing just fine. No immediate action needed. 😌';
+      } else if (response === 'pain') {
+        message = '🚨 URGENT! Your loved one is experiencing *pain*, but can still stand and walk. 🏃‍♂️ Please check in as soon as possible!';
+      } else if (response === 'help') {
+        message = '⚠️ CRITICAL ALERT! Your loved one needs *immediate help*! 🚑 Please respond without delay!';
+      }
 
-      // Change the button text after check-in
-      this.checkInButtonText = 'Check in done for the day. Have a good day!';
-    }
-  },
-  closeNotification() {
-    this.showNotification = false; // Hide the notification box
-  },
-  goToChatrooms() {
-    this.$router.push({ name: 'ChatRoom' });
-  },
-  goToSos() {
-    this.$router.push({ name: 'SOS' });
-  },
-},
+      // Send the message to Telegram
+      await this.sendTelegramMessage(message);
+    },
+    async sendTelegramMessage(message) {
+      const botToken = '7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI'; // Replace with your bot token
+      const chatId = '311341386'; // Replace with your chat ID use the link to find chat id: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates, group chat id is: -1002147797812
 
+      try {
+        const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+          }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          console.log('Message sent successfully');
+        } else {
+          console.error('Failed to send message', result);
+        }
+      } catch (error) {
+        console.error('Error sending message', error);
+      }
+    },
+    goHome() {
+      this.$router.push({ name: 'Home' }); // Navigate to the home route
+    },
+  },
 };
+
 </script>
 
 <style scoped>
