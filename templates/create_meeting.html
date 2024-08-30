@@ -140,7 +140,7 @@
             .then(data => {
                 if (data.id) {
                     // Redirect to the meeting details page with the meeting ID
-                    window.location.href = `http://127.0.0.1:5500/templates/test.html?meeting_id=${data.id}&join_url=${encodeURIComponent(data.join_url)}&start_url=${encodeURIComponent(data.start_url)}`;
+                    window.location.href = `http://127.0.0.1:5501/templates/test.html?meeting_id=${data.id}&join_url=${encodeURIComponent(data.join_url)}&start_url=${encodeURIComponent(data.start_url)}`;
                 } else {
                     alert('Error creating meeting. Check console for details.');
                 }
