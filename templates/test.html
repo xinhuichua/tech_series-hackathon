@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Zoom Integration</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:history.back()">Go Back</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1>Meeting Details</h1>
+        <div id="meetingCard" class="card mt-4">
+            <div class="card-body">
+                <!-- Meeting details will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to extract query parameters from the URL
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            params.meeting_id = urlParams.get('meeting_id');
+            params.join_url = urlParams.get('join_url');
+            params.start_url = urlParams.get('start_url');
+            return params;
+        }
+
+        // Populate the card with meeting details
+        function displayMeetingDetails() {
+            const meetingParams = getQueryParams();
+            const meetingCardBody = document.querySelector('#meetingCard .card-body');
+            
+            if (meetingParams.meeting_id && meetingParams.join_url && meetingParams.start_url) {
+                meetingCardBody.innerHTML = `
+                    <h5 class="card-title">Meeting Created Successfully</h5>
+                    <p><strong>Meeting ID:</strong> ${meetingParams.meeting_id}</p>
+                    <p><strong>Join URL:</strong> <a href="${meetingParams.join_url}" target="_blank">${meetingParams.join_url}</a></p>
+                    <p><strong>Start URL:</strong> <a href="${meetingParams.start_url}" target="_blank">${meetingParams.start_url}</a></p>
+                `;
+            } else {
+                meetingCardBody.innerHTML = `<p class="text-danger">No meeting details available.</p>`;
+            }
+        }
+
+        // Call the function to display the details when the page loads
+        window.onload = displayMeetingDetails;
+    </script>
+</body>
+</html>

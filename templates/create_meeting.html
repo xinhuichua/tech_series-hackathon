@@ -1,20 +1,3 @@
-from flask import Flask, request, jsonify, render_template_string
-import requests
-import json
-from requests.auth import HTTPBasicAuth
-
-app = Flask(__name__)
-
-# Replace these with your Zoom API credentials
-CLIENT_ID = 'EvNY6dvWTsaZZ8Y7YS_d3Q'
-CLIENT_SECRET = 'aQlvogJt16hDEGYIBGeFj2BHUgZ3N97Y'
-ACCOUNT_ID = 'jwoIw2hMSUesTNAd_BA6Bw'
-
-# Global variable to store the access token
-ACCESS_TOKEN = None
-
-# HTML template for getting the OAuth token and creating meetings
-HTML_TEMPLATE = '''
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +18,23 @@ HTML_TEMPLATE = '''
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="http://127.0.0.1:5500/templates/create_meeting.html">Zoom OAuth & Meetings</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:5500/templates/create_meeting.html">Create Meeting</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:8000/admin">Meeting Details</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
         <h1 class="mb-4">Zoom OAuth & Meeting Integration</h1>
 
@@ -81,18 +81,12 @@ HTML_TEMPLATE = '''
                 </form>
             </div>
         </div>
-
-        <div id="meetingInfo" class="card">
-            <div class="card-body">
-                <!-- Meeting information will be injected here -->
-            </div>
-        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         document.getElementById('getTokenButton').addEventListener('click', function() {
-            axios.post('/api/get-token')
+            axios.post('http://127.0.0.1:8001/api/get-token')
                 .then(response => {
                     const data = response.data;
                     if (data.access_token) {
@@ -135,7 +129,7 @@ HTML_TEMPLATE = '''
                 }
             };
 
-            fetch('/api/create-meeting', {
+            fetch('http://127.0.0.1:8001/api/create-meeting', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -144,68 +138,18 @@ HTML_TEMPLATE = '''
             })
             .then(response => response.json())
             .then(data => {
-                const meetingInfo = document.getElementById('meetingInfo').querySelector('.card-body');
                 if (data.id) {
-                    meetingInfo.innerHTML = `
-                        <h5 class="card-title">Meeting Created Successfully</h5>
-                        <p><strong>Meeting ID:</strong> ${data.id}</p>
-                        <p><strong>Join URL:</strong> <a href="${data.join_url}" target="_blank">${data.join_url}</a></p>
-                        <p><strong>Start URL:</strong> <a href="${data.start_url}" target="_blank">${data.start_url}</a></p>
-                    `;
+                    // Redirect to the meeting details page with the meeting ID
+                    window.location.href = `http://127.0.0.1:5500/templates/test.html?meeting_id=${data.id}&join_url=${encodeURIComponent(data.join_url)}&start_url=${encodeURIComponent(data.start_url)}`;
                 } else {
-                    meetingInfo.innerHTML = `<p class="text-danger">Error creating meeting. Check console for details.</p>`;
+                    alert('Error creating meeting. Check console for details.');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                document.getElementById('meetingInfo').querySelector('.card-body').innerHTML = `<p class="text-danger">Error creating meeting. Check console for details.</p>`;
+                alert('Error creating meeting. Check console for details.');
             });
         });
     </script>
 </body>
 </html>
-'''
-
-@app.route('/')
-def index():
-    return render_template_string(HTML_TEMPLATE)
-
-@app.route('/api/get-token', methods=['POST'])
-def get_token():
-    global ACCESS_TOKEN
-    url = 'https://zoom.us/oauth/token?grant_type=account_credentials&account_id=' + ACCOUNT_ID
-
-    # Request the access token
-    response = requests.post(url, auth=HTTPBasicAuth(CLIENT_ID, CLIENT_SECRET))
-
-    if response.status_code == 200:
-        token_info = response.json()
-        ACCESS_TOKEN = token_info['access_token']
-        return jsonify(token_info)
-    else:
-        return jsonify({
-            'error': 'Failed to obtain access token',
-            'status_code': response.status_code,
-            'response': response.json()
-        }), response.status_code
-
-@app.route('/api/create-meeting', methods=['POST'])
-def create_meeting():
-    global ACCESS_TOKEN
-    meeting_data = request.json
-    url = 'https://api.zoom.us/v2/users/me/meetings'
-
-    # Set up headers
-    headers = {
-        'Authorization': f'Bearer {ACCESS_TOKEN}',
-        'Content-Type': 'application/json'
-    }
-
-    # Make the API request
-    response = requests.post(url, headers=headers, data=json.dumps(meeting_data))
-
-    # Return the response
-    return jsonify(response.json()), response.status_code
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8001)
