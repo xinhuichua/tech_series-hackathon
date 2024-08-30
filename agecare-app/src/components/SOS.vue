@@ -57,7 +57,7 @@ export default {
       }
     },
     goHome() {
-      this.$router.push({ name: 'Home' }); // Navigate to the home route
+      this.$router.push({ name: 'Home' }); 
     },
   },
 };

@@ -36,8 +36,8 @@ export default {
     return {
       currentDate: new Date().toLocaleDateString(),
       currentTime: new Date().toLocaleTimeString(),
-      showNotification: false, // Controls the visibility of the notification box
-      checkInMessage: 'Thank you for checking in! Hope you are doing well!', // The notification message
+      showNotification: false, 
+      checkInMessage: 'Thank you for checking in! Hope you are doing well!', // notif msg
       notifications: [
         {
           id: 1,
@@ -61,9 +61,9 @@ export default {
   async checkIn() {
     // Mark the first notification as checked in
     if (this.notifications.length > 0) {
-      this.notifications[0].checkedIn = true; // Mark as checked in
-      this.notifications = this.notifications.filter(n => !n.checkedIn); // Remove checked in notifications
-      this.showNotification = true; // Show the confirmation message
+      this.notifications[0].checkedIn = true; 
+      this.notifications = this.notifications.filter(n => !n.checkedIn); 
+      this.showNotification = true; 
     }
   },
   closeNotification() {
@@ -118,7 +118,7 @@ export default {
   box-sizing: border-box;
   background-color: #f0f0f0;
   margin: 0 auto;
-  background-image: url('./src/assets/care.PNG'); /* Path to your uploaded image */
+  background-image: url('./src/assets/care.PNG'); 
   background-size: cover;
   background-position: center;
 }
@@ -126,7 +126,7 @@ export default {
 .main-content {
   display: flex;
   flex-grow: 1;
-  background-color: rgba(255, 255, 255, 0.75); /* Semi-transparent overlay for readability */
+  background-color: rgba(255, 255, 255, 0.75); 
   border-radius: 10px;
   padding: 10px;
 }
@@ -150,7 +150,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%; /* Make the items fill the grid cell */
+  height: 100%; 
 }
 
 .going-out {
@@ -184,7 +184,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%; /* Ensures this section takes all available height */
+  height: 100%; 
 }
 
 .notification-box {
@@ -196,7 +196,7 @@ export default {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  z-index: 1000; /* Ensure the box is above other content */
+  z-index: 1000; 
 }
 
 .notification-content {
