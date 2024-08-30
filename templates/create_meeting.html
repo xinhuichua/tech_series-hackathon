@@ -90,14 +90,7 @@
                 .then(response => {
                     const data = response.data;
                     if (data.access_token) {
-                        document.getElementById('tokenDisplay').innerHTML = `
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Access Token</h5>
-                                    <p class="card-text"><strong>Token:</strong> ${data.access_token}</p>
-                                </div>
-                            </div>
-                        `;
+                        alert("success, pls fill in next details")
                     } else {
                         document.getElementById('tokenDisplay').innerHTML = '<p>Error fetching token. Check console for details.</p>';
                     }
