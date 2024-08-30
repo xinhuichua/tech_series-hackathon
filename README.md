@@ -19,6 +19,10 @@ We are proposing a comprehensive solution to enhance the quality of life for the
 ## Technologies Used to Develop the Website
 Vue, Python
 
+## Steps to run the application
+cd agecare-app
+npm run dev
+
 ## Helpful references
 - [Vue.js] (https://vuejs.org/)
 - [Vue Boostrap] (https://bootstrap-vue.org/)
