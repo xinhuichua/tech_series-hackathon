@@ -62,9 +62,10 @@ pip install flask_cors
     ```
     cd agecare-app
     ```
-
-### 3. Run the app
+  * Run the app
+    ```
     npm run dev
+    ```
 
 ## Helpful references
 - [Vue.js] (https://vuejs.org/)
