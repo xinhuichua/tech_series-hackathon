@@ -31,11 +31,17 @@ npm install
 * First Terminal:
   * Run the Python script:
     ```
+    cd agecare-app
+    ```
+    ```
     python MedicineData.py
     ```
 
 * Second Terminal
   * Run the Python script:
+    ```
+    cd agecare-app
+    ```
     ```
     run ChatRoom.py
     ```
