@@ -21,7 +21,7 @@ We are proposing a comprehensive solution to enhance the quality of life for the
 Vue, Python, HTML
 
 ## Steps to run the application
-### 1. Install the requried packages
+### 1. Install the required packages
 ```
 npm install
 ```
