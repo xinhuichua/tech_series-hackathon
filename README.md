@@ -21,12 +21,12 @@ To be able to receive messages:
 Vue, Python, HTML
 
 ## Steps to run the application
-### Install the requried packages
+### 1. Install the requried packages
 ```
 npm install
 ```
 
-### Open 3 terminals
+### 2. Open 3 terminals
 
 * First Terminal:
   * Run the Python script:
@@ -45,7 +45,7 @@ npm install
     cd agecare-app
     ```
 
-### Run the app
+### 3. Run the app
     ```
       npm run dev
     ```
