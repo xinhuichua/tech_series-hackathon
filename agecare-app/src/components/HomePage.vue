@@ -129,8 +129,8 @@ export default {
     },
 
     async sendTelegramAlert() {
-      const botToken = 'YOUR_BOT_TOKEN';
-      const chatId = 'YOUR_CHAT_ID';
+      const botToken = '7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI';
+      const chatId = '-1002147797812';
       const message = '👴👵 ALERT!! Your loved one nearly had a fall. We are currently checking on his/her condition. ⌛ Please respond without delay!';
       try {
         const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
