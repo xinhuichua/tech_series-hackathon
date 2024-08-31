@@ -27,7 +27,7 @@ Vue, Python
 Open 3 terminals
 
 1) First Terminal:
- *Run the Python script:
+ * Run the Python script:
   ```
   python MedicineData.py
   ```
