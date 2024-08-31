@@ -12,7 +12,7 @@ We are proposing a comprehensive solution to enhance the quality of life for the
   - To be able to receive messages:
     1. Send a message to the following bot: [ElderCareAlertBot](https://t.me/ElderCareAlertBot)
     2. Retrieve Chat ID via the following API endpoint: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319
-    3. Replace the Chat ID in line 35 of the code with your Chat ID
+    3. Replace the Chat ID in line 35 of the code with your Chat ID of VUE.sos and line 133 of HomePage.vue
 
 ### Feature 3
 - Medication Notification for Seniors
