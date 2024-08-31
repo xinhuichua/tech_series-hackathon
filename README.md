@@ -3,10 +3,7 @@
 ## Proposed Solution
 We are proposing a comprehensive solution to enhance the quality of life for the ageing population by improving access to healthcare, fostering social engagement, and providing daily living and emergency assistance. 
 
-## Applications' Core 
-
-
-## Features Implemented
+## Features Implemented in Our Application
 ### Feature 1
 - Moderated and Regulated Chatrooms to encourage befriending and promote engagement with other seniors
 
@@ -44,6 +41,7 @@ run MedicineData.py
 ## Helpful references
 - [Vue.js] (https://vuejs.org/)
 - [Vue Boostrap] (https://bootstrap-vue.org/)
+- [Telegram API] (https://core.telegram.org/)
 
 ## Developers
 ### Chua Xinyan
