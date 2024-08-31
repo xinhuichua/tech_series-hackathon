@@ -3,15 +3,13 @@
 ## Proposed Solution
 We are proposing a comprehensive solution to enhance the quality of life for the ageing population by improving access to healthcare, fostering social engagement, and providing daily living and emergency assistance. 
 
-## Applications' Core 
-
-
-## Features Implemented
+## Features Implemented in Our Application
 ### Feature 1
 - Moderated and Regulated Chatrooms to encourage befriending and promote engagement with other seniors
 
 ### Feature 2
 - Emergency SOS Button Integration for Fall Prevention
+<<<<<<< HEAD
 To be aboe to receive messages:
 1. Send a Message to the following bot: https://t.me/ElderCareAlertBot
 2. Retrieve Chat id via: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319
@@ -19,17 +17,60 @@ To be aboe to receive messages:
   
 ### Feature 3
 - Personalized Daily Routine and Medication Management for Seniors
+=======
+  - To be able to receive messages:
+    1. Send a message to the following bot: [ElderCareAlertBot](https://t.me/ElderCareAlertBot)
+    2. Retrieve Chat ID via the following API endpoint: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319
+    3. Replace the Chat ID in line 35 of the code with your Chat ID
+>>>>>>> 9ccf8e8ef53a9cc0ef1158ae6468a4c96d7df8d5
 
-## Technologies Used to Develop the Website
-Vue, Python
+### Feature 3
+- Medication Notification for Seniors
+
+## Key Technologies Used to Develop the Website
+Vue, Python, HTML
 
 ## Steps to run the application
-cd agecare-app
-npm run dev
+### 1. Install the required packages
+```
+npm install
+```
+```
+pip install flask_cors
+```
+
+### 2. Open 3 terminals
+
+* First Terminal:
+  * Run the Python script:
+    ```
+    cd agecare-app
+    ```
+    ```
+    python MedicineData.py
+    ```
+
+* Second Terminal
+  * Run the Python script:
+    ```
+    cd agecare-app
+    ```
+    ```
+    run ChatRoom.py
+    ```
+* Third Terminal:
+  * Navigate to the application directory
+    ```
+    cd agecare-app
+    ```
+
+### 3. Run the app
+    npm run dev
 
 ## Helpful references
 - [Vue.js] (https://vuejs.org/)
 - [Vue Boostrap] (https://bootstrap-vue.org/)
+- [Telegram API] (https://core.telegram.org/)
 
 ## Developers
 ### Chua Xinyan
