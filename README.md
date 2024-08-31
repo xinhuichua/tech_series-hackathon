@@ -12,7 +12,7 @@ We are proposing a comprehensive solution to enhance the quality of life for the
 
 ### Feature 2
 - Emergency SOS Button Integration for Fall Prevention
-To be aboe to receive messages:
+To be able to receive messages:
 1. Send a Message to the following bot: https://t.me/ElderCareAlertBot
 2. Retrieve Chat id via: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319
 3. Replace Chat id in line 35 with your Chat id
@@ -27,12 +27,18 @@ Vue, Python
 Open 2 terminals
 
 1) First Terminal:
- python MedicineData.py
+ Run the Python script:
+python MedicineData.py
 
-2) Second Terminal:
-cd agecare-app
-npm install
-npm run dev
+
+2)Second Terminal
+Run the Python script:
+run MedicineData.py
+
+3)Third Terminal:
+- cd agecare-app
+- npm install
+- npm run dev
 
 ## Helpful references
 - [Vue.js] (https://vuejs.org/)
