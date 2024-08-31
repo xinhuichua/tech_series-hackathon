@@ -47,7 +47,7 @@ npm install
 
 ### 3. Run the app
     ```
-      npm run dev
+    npm run dev
     ```
 
 ## Helpful references
