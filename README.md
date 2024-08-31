@@ -25,6 +25,9 @@ Vue, Python, HTML
 ```
 npm install
 ```
+```
+pip install flask_cors
+```
 
 ### 2. Open 3 terminals
 
