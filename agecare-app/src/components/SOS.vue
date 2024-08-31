@@ -32,7 +32,7 @@ export default {
     },
     async sendTelegramMessage(message) {
       const botToken = '7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI'; // Replace with your bot token
-      const chatId = '-1002147797812'; // Replace with your chat ID use the link to find chat id: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319, group chat id is: -1002147797812
+      const chatId = '-4538397345'; // Replace with your chat ID use the link to find chat id: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319, group chat id is: -1002147797812
 
       try {
         const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
