@@ -18,7 +18,7 @@ To be able to receive messages:
 3. Replace Chat id in line 35 with your Chat id
   
 ### Feature 3
-- Personalized Daily Routine and Medication Management for Seniors
+- Medication Notification for Seniors
 
 ## Technologies Used to Develop the Website
 Vue, Python
@@ -31,7 +31,6 @@ Open 3 terminals
   ```
   python MedicineData.py
   ```
-
 
 2)Second Terminal
 Run the Python script:
