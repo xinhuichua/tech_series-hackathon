@@ -29,7 +29,7 @@ npm install
 2. Open 3 terminals
 
 * First Terminal:
- * Run the Python script:
+  * Run the Python script:
     ```
     python MedicineData.py
     ```
