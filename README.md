@@ -11,9 +11,10 @@ We are proposing a comprehensive solution to enhance the quality of life for the
 - Emergency SOS Button Integration for Fall Prevention
 =====
 To be able to receive messages:
-1. Send a Message to the following bot: https://t.me/ElderCareAlertBot
-2. Retrieve Chat id via: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845479
-3. Replace Chat id with your Chat id. There are two chat ids to replace, one in SOS.vue (line 35) and another in homepage.vue (line 133)
+1. Send </start> to the bot: https://t.me/ElderCareAlertBot
+2. Send a Message to the following bot. i.e. Hello
+3. Retrieve Chat id via: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845479
+4. Replace Chat id with your Chat id. There are two chat ids to replace, one in SOS.vue (line 35) and another in homepage.vue (line 133)
   
 ### Feature 3
 - Personalized Daily Routine and Medication Management for Seniors
