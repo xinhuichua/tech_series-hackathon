@@ -17,8 +17,8 @@ To be able to receive messages:
 ### Feature 3
 - Medication Notification for Seniors
 
-## Technologies Used to Develop the Website
-Vue, Python
+## Key Technologies Used to Develop the Website
+Vue, Python, HTML
 
 ## Steps to run the application
 ### Install the requried packages
