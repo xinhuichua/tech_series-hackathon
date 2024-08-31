@@ -30,13 +30,24 @@ Open 3 terminals
   ```
 
 2)Second Terminal
-Run the Python script:
-run MedicineData.py
+* Run the Python script:
+  ```
+  run MedicineData.py
+  ```
 
 3)Third Terminal:
-- cd agecare-app
-- npm install
+* Navigate to the application directory
+```
+cd agecare-app
+```
+* Install the requried packages
+```
+npm install
+```
+*Run the app
+```
 - npm run dev
+```
 
 ## Helpful references
 - [Vue.js] (https://vuejs.org/)
