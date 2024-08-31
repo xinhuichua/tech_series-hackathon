@@ -22,7 +22,6 @@ To be aboe to receive messages:
     1. Send a message to the following bot: [ElderCareAlertBot](https://t.me/ElderCareAlertBot)
     2. Retrieve Chat ID via the following API endpoint: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319
     3. Replace the Chat ID in line 35 of the code with your Chat ID
->>>>>>> 9ccf8e8ef53a9cc0ef1158ae6468a4c96d7df8d5
 
 ### Feature 3
 - Medication Notification for Seniors
@@ -56,7 +55,7 @@ pip install flask_cors
     cd agecare-app
     ```
     ```
-    run ChatRoom.py
+    python ChatRoom.py
     ```
 * Third Terminal:
   * Navigate to the application directory
