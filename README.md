@@ -28,20 +28,19 @@ npm install
 
 2. Open 3 terminals
 
-- First Terminal:
+* First Terminal:
  * Run the Python script:
-  ```
-  python MedicineData.py
-  ```
+    ```
+    python MedicineData.py
+    ```
 
-- Second Terminal
-* Run the Python script:
+* Second Terminal
+  * Run the Python script:
   ```
   run MedicineData.py
   ```
-
-- Third Terminal:
-* Navigate to the application directory
+* Third Terminal:
+  * Navigate to the application directory
 ```
 cd agecare-app
 ```
