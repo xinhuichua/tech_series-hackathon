@@ -9,8 +9,8 @@ We are proposing a comprehensive solution to enhance the quality of life for the
 
 ### Feature 2
 - Emergency SOS Button Integration for Fall Prevention
-<<<<<<< HEAD
-To be aboe to receive messages:
+-
+  To be aboe to receive messages:
 1. Send a Message to the following bot: https://t.me/ElderCareAlertBot
 2. Retrieve Chat id via: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319
 3. Replace Chat id with your Chat id. There are two chat ids to replace, one in SOS.vue (line 35) and another in homepage.vue (line 133)
