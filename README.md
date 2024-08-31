@@ -11,7 +11,7 @@ We are proposing a comprehensive solution to enhance the quality of life for the
 - Emergency SOS Button Integration for Fall Prevention
   - To be able to receive messages:
     1. Send a message to the following bot: [ElderCareAlertBot](https://t.me/ElderCareAlertBot)
-    2. Retrieve Chat ID via the following API endpoint: [Telegram API] https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319
+    2. Retrieve Chat ID via the following API endpoint: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319
     3. Replace the Chat ID in line 35 of the code with your Chat ID
 
 ### Feature 3
