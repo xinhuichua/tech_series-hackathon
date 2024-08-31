@@ -9,22 +9,14 @@ We are proposing a comprehensive solution to enhance the quality of life for the
 
 ### Feature 2
 - Emergency SOS Button Integration for Fall Prevention
-<<<<<<< HEAD
-To be aboe to receive messages:
+=====
+To be able to receive messages:
 1. Send a Message to the following bot: https://t.me/ElderCareAlertBot
 2. Retrieve Chat id via: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319
-3. Replace Chat id in line 35 with your Chat id. There are two chat ids to replace, one in SOS.vue and another in homepage.vue
+3. Replace Chat id with your Chat id. There are two chat ids to replace, one in SOS.vue (line 35) and another in homepage.vue (line 133)
   
 ### Feature 3
 - Personalized Daily Routine and Medication Management for Seniors
-=======
-  - To be able to receive messages:
-    1. Send a message to the following bot: [ElderCareAlertBot](https://t.me/ElderCareAlertBot)
-    2. Retrieve Chat ID via the following API endpoint: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319
-    3. Replace the Chat ID in line 35 of the code with your Chat ID
-
-### Feature 3
-- Medication Notification for Seniors
 
 ## Key Technologies Used to Develop the Website
 Vue, Python, HTML
