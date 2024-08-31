@@ -28,7 +28,8 @@ Open 2 terminals
 
 1) First Terminal:
  Run the Python script:
-python MedicineData.py
+```python MedicineData.py
+```
 
 
 2)Second Terminal
