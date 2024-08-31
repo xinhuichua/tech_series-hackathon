@@ -46,9 +46,7 @@ npm install
     ```
 
 ### 3. Run the app
-    ```
     npm run dev
-    ```
 
 ## Helpful references
 - [Vue.js] (https://vuejs.org/)
