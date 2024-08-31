@@ -24,7 +24,14 @@ To be aboe to receive messages:
 Vue, Python
 
 ## Steps to run the application
+Open 2 terminals
+
+1) First Terminal:
+ python MedicineData.py
+
+2) Second Terminal:
 cd agecare-app
+npm install
 npm run dev
 
 ## Helpful references
