@@ -18,9 +18,6 @@ To be aboe to receive messages:
 ### Feature 3
 - Personalized Daily Routine and Medication Management for Seniors
 
-### Feature 3
-- Medication Notification for Seniors
-
 ## Key Technologies Used to Develop the Website
 Vue, Python, HTML
 
