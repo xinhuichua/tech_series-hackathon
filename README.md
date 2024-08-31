@@ -24,10 +24,10 @@ To be able to receive messages:
 Vue, Python
 
 ## Steps to run the application
-Open 2 terminals
+Open 3 terminals
 
 1) First Terminal:
- Run the Python script:
+ *Run the Python script:
   ```
   python MedicineData.py
   ```
