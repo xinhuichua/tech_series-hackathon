@@ -15,7 +15,7 @@ We are proposing a comprehensive solution to enhance the quality of life for the
 To be aboe to receive messages:
 1. Send a Message to the following bot: https://t.me/ElderCareAlertBot
 2. Retrieve Chat id via: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319
-3. Replace Chat id in line 35 with your Chat id
+3. Replace Chat id in line 35 with your Chat id. There are two chat ids to replace, one in SOS.vue and another in homepage.vue
   
 ### Feature 3
 - Personalized Daily Routine and Medication Management for Seniors
