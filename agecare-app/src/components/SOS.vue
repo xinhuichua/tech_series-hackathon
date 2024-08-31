@@ -31,7 +31,7 @@ export default {
       await this.sendTelegramMessage(message);
     },
     async sendTelegramMessage(message) {
-      const botToken = '7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI'; // Replace with your bot token
+      const botToken = '7101963436:AAEjFj-2SO55EB-W47Cjgw9l5giGWZO9Ni4'; // Replace with your bot token
       const chatId = '-4538397345'; // Replace with your chat ID use the link to find chat id: https://api.telegram.org/bot7129549276:AAEst0pSSbyIVm8ReCWTpwlck3Q5uCGExhI/getUpdates?offset=6845319, group chat id is: -1002147797812
 
       try {
