@@ -13,7 +13,7 @@ We are proposing a comprehensive solution to enhance the quality of life for the
 To be able to receive messages:
 1. Send </start> to the bot: https://t.me/ElderCareAlertBot
 2. Send a Message to the following bot. i.e. Hello
-3. Retrieve Chat id via: https://tinyurl.com/retrieveChatID
+3. Retrieve Chat id via: https://tinyurl.com/checkChatID
 4. Replace Chat id with your Chat id. There are two chat ids to replace, one in SOS.vue (line 35) and another in homepage.vue (line 133)
   
 ### Feature 3
