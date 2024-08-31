@@ -37,7 +37,7 @@ npm install
 * Second Terminal
   * Run the Python script:
     ```
-    run MedicineData.py
+    run ChatRoom.py
     ```
 * Third Terminal:
   * Navigate to the application directory
