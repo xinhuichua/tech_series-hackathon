@@ -46,7 +46,7 @@ pip install flask_cors
     cd agecare-app
     ```
     ```
-    run ChatRoom.py
+    python ChatRoom.py
     ```
 * Third Terminal:
   * Navigate to the application directory
