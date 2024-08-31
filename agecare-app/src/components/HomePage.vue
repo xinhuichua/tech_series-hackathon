@@ -2,7 +2,7 @@
   <div class="container border rounded-3 bg-white bg-opacity-75 p-5">
       <div class="main-content">
         <div class="grid-container">
-          <!-- Modified Check In Button to also mark medications as taken -->
+          <!-- Check In Button now checks for selected medications -->
           <button class="grid-item going-out" @click="checkInAndMarkMedications">Check In</button>
           <button class="grid-item" @click="goToChatrooms">Chatrooms</button>
           <button class="grid-item" @click="goToSos">Emergency SOS Button</button>
@@ -13,18 +13,16 @@
             <p>{{ currentDate }}</p>
             <p>{{ currentTime }}</p>
           </div>
-          <h1>Mediciations:</h1>
+          <h1>Medications:</h1>
           <div class="message">
-          
             <h2 v-if="notifications.length > 0">
               Notification: {{ notifications[0].message }}
             </h2>
             <div class="medication-box">
               <ul v-if="medications.length > 0">
-             
                 <li v-for="med in medications" :key="med.id">
+                  <input type="checkbox" v-model="med.checked"> <!-- Checkbox for each medication -->
                   {{ med.name }} {{ med.dosage }}
-                  
                 </li>
               </ul>
               <p v-else>No medication reminders available.</p>
@@ -41,139 +39,125 @@
       </div>
     </div>
   </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        currentDate: new Date().toLocaleDateString(),
-        currentTime: new Date().toLocaleTimeString(),
-        showNotification: false,
-        notificationMessage: '',
-        notifications: [
-          // {
-          //   id: 1,
-          //   message: 'Time to take your Aspirin (100mg)',
-          //   checkedIn: false,
-          // },
-          // {
-          //   id: 2,
-          //   message: 'Time to take your Lisinopril (10mg)',
-          //   checkedIn: false,
-          // },
 
-
-        ],
-        medications: [],
-      };
-    },
-    mounted() {
-      setInterval(() => {
-        this.currentTime = new Date().toLocaleTimeString();
-      }, 1000);
-      this.fetchMedications();
-    },
-    methods: {
-      fetchMedications() {
-        fetch('http://127.0.0.1:8001/api/medications')
-          .then(response => response.json())
-          .then(data => {
-            this.medications = data;
-            if (this.medications.length > 0) {
-              this.showNotification = true;
-              this.notificationMessage = `You have ${this.medications.length} medication reminders.`;
-            } else {
-              this.showNotification = true;
-              this.notificationMessage = 'No medication reminders available.';
-            }
-          })
-          .catch(error => {
-            console.error('Error fetching medications:', error);
-            this.notificationMessage = 'Failed to fetch medications. Please try again later.';
+  
+<script>
+export default {
+  data() {
+    return {
+      currentDate: new Date().toLocaleDateString(),
+      currentTime: new Date().toLocaleTimeString(),
+      showNotification: false,
+      notificationMessage: '',
+      notifications: [],
+      medications: [],
+    };
+  },
+  mounted() {
+    setInterval(() => {
+      this.currentTime = new Date().toLocaleTimeString();
+    }, 1000);
+    this.fetchMedications();
+  },
+  methods: {
+    fetchMedications() {
+      fetch('http://127.0.0.1:8001/api/medications')
+        .then(response => response.json())
+        .then(data => {
+          this.medications = data.map(med => ({ ...med, checked: false })); // Add 'checked' property
+          if (this.medications.length > 0) {
             this.showNotification = true;
-          });
-      },
-  
-      takeMedication(medId) {
-        fetch(`http://127.0.0.1:8001/api/medications/${medId}/take`, {
-          method: 'POST',
-        })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Failed to mark medication as taken');
-            }
-            return response.json();
-          })
-          .then(() => {
-            this.medications = this.medications.filter(med => med.id !== medId);
-            this.notificationMessage = 'Medication marked as taken.';
-            this.showNotification = true;
-            if (this.medications.length === 0) {
-              this.notificationMessage = 'All medications have been taken.';
-            }
-          })
-          .catch(error => {
-            console.error('Error marking medication as taken:', error);
-            this.notificationMessage = 'Failed to mark medication as taken. Please try again.';
-            this.showNotification = true;
-          });
-      },
-  
-      checkInAndMarkMedications() {
-        if (this.notifications.length > 0) {
-          this.notifications[0].checkedIn = true;
-          this.notifications = this.notifications.filter(n => !n.checkedIn);
-        }
-        if (this.medications.length > 0) {
-          this.medications.forEach(med => this.takeMedication(med.id));
-        }
-        this.showNotification = true;
-        this.notificationMessage = 'Check-in completed and medications marked as taken.';
-      },
-  
-      closeNotification() {
-        this.showNotification = false;
-      },
-  
-      goToChatrooms() {
-        this.$router.push({ name: 'ChatRoom' });
-      },
-  
-      async goToSos() {
-        await this.sendTelegramAlert();
-        this.$router.push({ name: 'SOS' });
-      },
-  
-      async sendTelegramAlert() {
-        const botToken = 'YOUR_BOT_TOKEN'; // Replace with your bot token
-        const chatId = 'YOUR_CHAT_ID'; // Replace with your chat ID
-        const message = '👴👵 ALERT!! Your loved one nearly had a fall. We are currently checking on his/her condition. ⌛ Please respond without delay!';
-  
-        try {
-          const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              chat_id: chatId,
-              text: message,
-            }),
-          });
-  
-          const result = await response.json();
-          if (response.ok) {
-            console.log('Telegram alert sent successfully');
+            this.notificationMessage = `You have ${this.medications.length} medication reminders.`;
           } else {
-            console.error('Failed to send Telegram alert', result);
+            this.showNotification = true;
+            this.notificationMessage = 'No medication reminders available.';
           }
-        } catch (error) {
-          console.error('Error sending Telegram alert', error);
-        }
-      },
+        })
+        .catch(error => {
+          console.error('Error fetching medications:', error);
+          this.notificationMessage = 'Failed to fetch medications. Please try again later.';
+          this.showNotification = true;
+        });
     },
-  };
-  </script>
+
+    takeMedication(medId) {
+      fetch(`http://127.0.0.1:8001/api/medications/${medId}/take`, {
+        method: 'POST',
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to mark medication as taken');
+        }
+        return response.json();
+      })
+      .then(() => {
+        this.medications = this.medications.filter(med => med.id !== medId);
+        this.notificationMessage = 'Medication marked as taken.';
+        this.showNotification = true;
+        if (this.medications.length === 0) {
+          this.notificationMessage = 'All medications have been taken.';
+        }
+      })
+      .catch(error => {
+        console.error('Error marking medication as taken:', error);
+        this.notificationMessage = 'Failed to mark medication as taken. Please try again.';
+        this.showNotification = true;
+      });
+    },
+
+    checkInAndMarkMedications() {
+      this.medications.filter(med => med.checked).forEach(med => {
+        this.takeMedication(med.id);
+      });
+      // Uncheck all medications after processing
+      this.medications.forEach(med => med.checked = false);
+      this.showNotification = true;
+      this.notificationMessage = 'Check-in completed and selected medications marked as taken.';
+    },
+
+    closeNotification() {
+      this.showNotification = false;
+    },
+
+    goToChatrooms() {
+      this.$router.push({ name: 'ChatRoom' });
+    },
+
+    async goToSos() {
+      await this.sendTelegramAlert();
+      this.$router.push({ name: 'SOS' });
+    },
+
+    async sendTelegramAlert() {
+      const botToken = 'YOUR_BOT_TOKEN';
+      const chatId = 'YOUR_CHAT_ID';
+      const message = '👴👵 ALERT!! Your loved one nearly had a fall. We are currently checking on his/her condition. ⌛ Please respond without delay!';
+      try {
+        const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message,
+          }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          console.log('Telegram alert sent successfully');
+        } else {
+          console.error('Failed to send Telegram alert', result);
+        }
+      } catch (error) {
+        console.error('Error sending Telegram alert', error);
+      }
+    },
+  },
+};
+</script>
+
 
 
 <style scoped>
