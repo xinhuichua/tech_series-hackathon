@@ -38,17 +38,48 @@ def get_token():
         }), response.status_code
 
 
+# @app.route('/api/create-meeting', methods=['POST'])
+# def create_meeting():
+#     """ Create a new Zoom meeting. """
+#     global ACCESS_TOKEN
+#     headers = {
+#         'Authorization': f'Bearer {ACCESS_TOKEN}',
+#         'Content-Type': 'application/json'
+#     }
+#     response = requests.post('https://api.zoom.us/v2/users/me/meetings',
+#                              headers=headers, data=json.dumps(request.json))
+#     return jsonify(response.json()), response.status_code
 @app.route('/api/create-meeting', methods=['POST'])
 def create_meeting():
-    """ Create a new Zoom meeting. """
-    global ACCESS_TOKEN
-    headers = {
-        'Authorization': f'Bearer {ACCESS_TOKEN}',
-        'Content-Type': 'application/json'
+    data = request.json
+    token = request.headers.get('Authorization').split()[1]
+
+    meeting_details = {
+        "topic": data['topic'],
+        "type": 2,  # Scheduled meeting
+        "start_time": data['start_time'],
+        "timezone": "UTC"
     }
-    response = requests.post('https://api.zoom.us/v2/users/me/meetings',
-                             headers=headers, data=json.dumps(request.json))
-    return jsonify(response.json()), response.status_code
+
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json"
+    }
+
+    response = requests.post(
+        "https://api.zoom.us/v2/users/me/meetings",
+        headers=headers,
+        json=meeting_details
+    )
+
+    if response.status_code == 201:
+        meeting_info = response.json()
+        return jsonify({
+            "join_url": meeting_info['join_url'],
+            "start_url": meeting_info['start_url']  # Include start_url
+        })
+    else:
+        return jsonify({"message": "Failed to create Zoom meeting"}), response.status_code
 
 
 @app.route('/api/add-meeting', methods=['POST'])

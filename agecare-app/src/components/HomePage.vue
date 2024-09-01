@@ -1,44 +1,46 @@
 <template>
   <div class="container border rounded-3 bg-white bg-opacity-75 p-5">
-      <div class="main-content">
-        <div class="grid-container">
-          <!-- Check In Button now checks for selected medications -->
-          <button class="grid-item going-out" @click="checkInAndMarkMedications">Check In</button>
-          <button class="grid-item" @click="goToChatrooms">Chatrooms</button>
-          <button class="grid-item" @click="goToSos">Emergency SOS Button</button>
-        </div>
-        <div class="right-panel">
-          <div class="header">
-            <h4><b>Hello! Hope you are having a good day today!</b></h4>
-            <p>{{ currentDate }}</p>
-            <p>{{ currentTime }}</p>
-          </div>
-          <h1>Medications:</h1>
-          <div class="message">
-            <h2 v-if="notifications.length > 0">
-              Notification: {{ notifications[0].message }}
-            </h2>
-            <div class="medication-box">
-              <ul v-if="medications.length > 0">
-                <li v-for="med in medications" :key="med.id">
-                  <input type="checkbox" v-model="med.checked"> <!-- Checkbox for each medication -->
-                  {{ med.name }} {{ med.dosage }}
-                </li>
-              </ul>
-              <p v-else>No medication reminders available.</p>
-            </div>
-          </div>
-        </div>
+    <div class="main-content">
+      <div class="grid-container">
+        <!-- Check In Button now checks for selected medications -->
+        <button class="grid-item going-out" @click="checkInAndMarkMedications">Check In</button>
+        <button class="grid-item" @click="goToChatrooms">Admin</button>
+        <button class="grid-item" @click="goToSos">Emergency SOS Button</button>
+        <!-- Add a button to navigate to UserPage -->
+        <RouterLink to="/UserPage" class="grid-item2 going-out2">User Page </RouterLink>
       </div>
-      <!-- Message Box for Notification -->
-      <div v-if="showNotification" class="notification-box">
-        <div class="notification-content">
-          <p>{{ notificationMessage }}</p>
-          <button @click="closeNotification">Close</button>
+      <div class="right-panel">
+        <div class="header">
+          <h4><b>Hello! Hope you are having a good day today!</b></h4>
+          <p>{{ currentDate }}</p>
+          <p>{{ currentTime }}</p>
+        </div>
+        <h1>Medications:</h1>
+        <div class="message">
+          <h2 v-if="notifications.length > 0">
+            Notification: {{ notifications[0].message }}
+          </h2>
+          <div class="medication-box">
+            <ul v-if="medications.length > 0">
+              <li v-for="med in medications" :key="med.id">
+                <input type="checkbox" v-model="med.checked">
+                {{ med.name }} {{ med.dosage }}
+              </li>
+            </ul>
+            <p v-else>No medication reminders available.</p>
+          </div>
         </div>
       </div>
     </div>
-  </template>
+    <!-- Message Box for Notification -->
+    <div v-if="showNotification" class="notification-box">
+      <div class="notification-content">
+        <p>{{ notificationMessage }}</p>
+        <button @click="closeNotification">Close</button>
+      </div>
+    </div>
+  </div>
+</template>
 
   
 <script>
@@ -205,9 +207,29 @@ export default {
   height: 100%;
 }
 
+.grid-item2 {
+  text-decoration: none; /* Removes the underline */
+  background-color: #007bff;
+  color: white;
+  font-size: 18px;
+  padding: 25px;
+  text-align: center;
+  border-radius: 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
 .going-out {
   grid-column: span 2;
   background-color: crimson;
+}
+.going-out2 {
+  grid-column: span 2;
+  background-color: #007bff;
 }
 
 .right-panel {
