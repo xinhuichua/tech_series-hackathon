@@ -3,11 +3,11 @@
     <div class="main-content">
       <div class="grid-container">
         <!-- Check In Button now checks for selected medications -->
-        <button class="grid-item going-out" @click="checkInAndMarkMedications">Check In</button>
-        <button class="grid-item" @click="goToChatrooms">Admin</button>
-        <button class="grid-item" @click="goToSos">Emergency SOS Button</button>
+        <button class="grid-item going-out3 " @click="checkInAndMarkMedications">Check In</button>
+        <button class="grid-item going-out" @click="goToSos">Emergency SOS Button</button>
+        <button class="grid-item" @click="goToChatrooms">Create Video Call</button>
         <!-- Add a button to navigate to UserPage -->
-        <RouterLink to="/UserPage" class="grid-item2 going-out2">User Page </RouterLink>
+        <button class="grid-item" @click = "goUserAcct" >Join Video Call</button>
       </div>
       <div class="right-panel">
         <div class="header">
@@ -15,7 +15,7 @@
           <p>{{ currentDate }}</p>
           <p>{{ currentTime }}</p>
         </div>
-        <h1>Medications:</h1>
+        <h1>Notifications</h1>
         <div class="message">
           <h2 v-if="notifications.length > 0">
             Notification: {{ notifications[0].message }}
@@ -27,7 +27,7 @@
                 {{ med.name }} {{ med.dosage }}
               </li>
             </ul>
-            <p v-else>No medication reminders available.</p>
+            <p v-else>No reminders!</p>
           </div>
         </div>
       </div>
@@ -76,9 +76,9 @@ export default {
           }
         })
         .catch(error => {
-          console.error('Error fetching medications:', error);
-          this.notificationMessage = 'Failed to fetch medications. Please try again later.';
-          this.showNotification = true;
+          console.log('Error fetching medications:');
+          // this.notificationMessage = 'Failed to fetch medications. Please try again later.';
+          // this.showNotification = true;
         });
     },
 
@@ -88,13 +88,13 @@ export default {
       })
       .then(response => {
         if (!response.ok) {
-          throw new Error('Failed to mark medication as taken');
+          console.log('Failed to mark medication as taken');
         }
         return response.json();
       })
       .then(() => {
         this.medications = this.medications.filter(med => med.id !== medId);
-        this.notificationMessage = 'Medication marked as taken.';
+        this.notificationMessage = 'Medication taken.';
         this.showNotification = true;
         if (this.medications.length === 0) {
           this.notificationMessage = 'All medications have been taken.';
@@ -102,8 +102,8 @@ export default {
       })
       .catch(error => {
         console.error('Error marking medication as taken:', error);
-        this.notificationMessage = 'Failed to mark medication as taken. Please try again.';
-        this.showNotification = true;
+        // this.notificationMessage = 'Failed to mark medication as taken. Please try again.';
+        // this.showNotification = true;
       });
     },
 
@@ -114,7 +114,7 @@ export default {
       // Uncheck all medications after processing
       this.medications.forEach(med => med.checked = false);
       this.showNotification = true;
-      this.notificationMessage = 'Check-in completed and selected medications marked as taken.';
+      this.notificationMessage = 'Notification is not checked.';
     },
 
     closeNotification() {
@@ -123,6 +123,9 @@ export default {
 
     goToChatrooms() {
       this.$router.push({ name: 'ChatRoom' });
+    },
+    goUserAcct() {
+      this.$router.push({ name: 'UserPage' });
     },
 
     async goToSos() {
@@ -231,6 +234,10 @@ export default {
   grid-column: span 2;
   background-color: #007bff;
 }
+.going-out3 {
+  grid-column: span 2;
+  background-color: green;
+}
 
 .right-panel {
   display: flex;
@@ -240,7 +247,7 @@ export default {
 }
 
 .header {
-  background-color: #007bff;
+  background-color: #ae00ff;
   color: white;
   padding: 25px;
   border-radius: 10px;
